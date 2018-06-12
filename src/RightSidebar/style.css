@@ -1,0 +1,62 @@
+/*RightSidebar Styling*/
+
+/*Improtant lines to display any 2d Div*/
+#rightContainer {
+	align-items: stretch;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 9998;
+}
+
+#rightSidebar {
+	display: inline-block;
+	background-color: #14121e;
+	border: none;
+	box-shadow: 0 2px 2px #ccc;
+	width: 180px;
+	height: 900px;
+	padding: 20px;
+}
+
+#colorPicker {
+  position: relative;
+  right: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.input {
+  position: relative;
+  left: 15px;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  background-color: #3f4467;
+  color: #64cac5;
+  border: none;
+  text-align: center;
+}
+
+
+
+
+
+#inputText {
+
+  position: relative;
+  left: 50px;
+}
+
+#inputText p {
+  color: #64cac5;
+  font-size: 10px;
+  margin-right: 45px;
+  font-style: italic;
+  display: inline-block;
+
+}

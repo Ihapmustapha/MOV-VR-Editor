@@ -1,0 +1,74 @@
+/*LeftSideBar Styling*/
+
+/*Improtant lines to display any 2d Div*/
+#leftContainer {
+	align-items: stretch;
+	display: flex;
+	justify-content: flex-end;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 9998;
+}
+
+#sideBar {
+	display: inline-block;
+	background-color: #14121e;
+	border: none;
+	box-shadow: 0 2px 2px #ccc;
+	width: 180px;
+	height: 900px;
+	padding: 20px;
+}
+
+p {
+	color: #64cac5;
+}
+
+#headline {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	left: 16px;
+	top: 20px;
+	font-size: 15px;
+}
+
+#navButtons {
+	position: fixed;
+	margin: 0;
+	padding: 0;
+	top: 670px;
+	left: 25px;
+}
+
+#navButtons button {
+	width: 80px;
+	height: 30px;
+	border: none;
+	color: #64cac5;
+	background-color: #3f4467;
+	margin: 1px;
+	cursor: pointer;
+}
+
+button svg {
+	fill: #64cac5;
+}
+
+.list-container {
+	position: relative;
+	top: 80px;
+	left: 3px;
+}
+
+#list-item {
+	display: inline-block;
+	width: 80px;
+	height: 80px;
+	border: none;
+	color: #64cac5;
+	background-color: #3f4467;
+	margin: 3px;
+	cursor: pointer;
+}

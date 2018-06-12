@@ -1,0 +1,209 @@
+/**
+ * Movement Controls
+ *
+ * @author Don McCurdy <dm@donmccurdy.com>
+ */
+
+const COMPONENT_SUFFIX = '-controls',
+    MAX_DELTA = 0.2, // ms
+    EPS = 10e-6;
+
+module.exports = AFRAME.registerComponent('movement-controls', {
+
+  /*******************************************************************
+   * Schema
+   */
+
+  dependencies: ['rotation'],
+
+  schema: {
+    enabled:      { default: true },
+    controls:     { default: ['gamepad', 'trackpad', 'keyboard', 'touch'] },
+    easing:       { default: 15 }, // m/s2
+    easingY:      { default: 0  }, // m/s2
+    acceleration: { default: 80 }, // m/s2
+    fly:                { default: false },
+    constrainToNavMesh: { default: false },
+    camera:          { default: '[camera]', type: 'selector' }
+  },
+
+  /*******************************************************************
+   * Lifecycle
+   */
+
+  init: function () {
+    const el = this.el;
+
+    this.velocityCtrl = null;
+
+    this.velocity = new THREE.Vector3();
+    this.heading = new THREE.Quaternion();
+
+    // Navigation
+    this.navGroup = null;
+    this.navNode = null;
+
+    if (el.sceneEl.hasLoaded) {
+      this.injectControls();
+    } else {
+      el.sceneEl.addEventListener('loaded', this.injectControls.bind(this));
+    }
+  },
+
+  update: function () {
+    if (this.el.sceneEl.hasLoaded) {
+      this.injectControls();
+    }
+  },
+
+  injectControls: function () {
+    const data = this.data;
+    var name;
+
+    for (let i = 0; i < data.controls.length; i++) {
+      name = data.controls[i] + COMPONENT_SUFFIX;
+      if (!this.el.components[name]) {
+        this.el.setAttribute(name, '');
+      }
+    }
+  },
+
+  updateNavNode: function () {
+    this.navNode = null;
+  },
+
+  /*******************************************************************
+   * Tick
+   */
+
+  tick: (function () {
+    const start = new THREE.Vector3();
+    const end = new THREE.Vector3();
+    const clampedEnd = new THREE.Vector3();
+
+    return function (t, dt) {
+      if (!dt) return;
+
+      const el = this.el;
+      const data = this.data;
+
+      if (!data.enabled) return;
+
+      this.updateVelocityCtrl();
+      const velocityCtrl = this.velocityCtrl;
+      const velocity = this.velocity;
+
+      if (!velocityCtrl) return;
+
+      // Update velocity. If FPS is too low, reset.
+      if (dt / 1000 > MAX_DELTA) {
+        velocity.set(0, 0, 0);
+      } else {
+        this.updateVelocity(dt);
+      }
+
+      if (data.constrainToNavMesh
+          && velocityCtrl.isNavMeshConstrained !== false) {
+
+        if (velocity.lengthSq() < EPS) return;
+
+        start.copy(el.object3D.position);
+        end
+          .copy(velocity)
+          .multiplyScalar(dt / 1000)
+          .add(start);
+
+        const nav = el.sceneEl.systems.nav;
+        this.navGroup = this.navGroup || nav.getGroup(start);
+        this.navNode = this.navNode || nav.getNode(start, this.navGroup);
+        this.navNode = nav.clampStep(start, end, this.navGroup, this.navNode, clampedEnd);
+        el.object3D.position.copy(clampedEnd);
+      } else if (el.hasAttribute('velocity')) {
+        el.setAttribute('velocity', velocity);
+      } else {
+        el.object3D.position.x += velocity.x * dt / 1000;
+        el.object3D.position.y += velocity.y * dt / 1000;
+        el.object3D.position.z += velocity.z * dt / 1000;
+      }
+
+    };
+  }()),
+
+  /*******************************************************************
+   * Movement
+   */
+
+  updateVelocityCtrl: function () {
+    const data = this.data;
+    if (data.enabled) {
+      for (let i = 0, l = data.controls.length; i < l; i++) {
+        const control = this.el.components[data.controls[i] + COMPONENT_SUFFIX];
+        if (control && control.isVelocityActive()) {
+          this.velocityCtrl = control;
+          return;
+        }
+      }
+      this.velocityCtrl = null;
+    }
+  },
+
+  updateVelocity: (function () {
+    // var matrix = new THREE.Matrix4();
+    // var matrix2 = new THREE.Matrix4();
+    // var position = new THREE.Vector3();
+    // var quaternion = new THREE.Quaternion();
+    // var scale = new THREE.Vector3();
+
+    return function (dt) {
+      let dVelocity;
+      const el = this.el;
+      const control = this.velocityCtrl;
+      const velocity = this.velocity;
+      const data = this.data;
+
+      if (control) {
+        if (control.getVelocityDelta) {
+          dVelocity = control.getVelocityDelta(dt);
+        } else if (control.getVelocity) {
+          velocity.copy(control.getVelocity());
+          return;
+        } else if (control.getPositionDelta) {
+          velocity.copy(control.getPositionDelta(dt).multiplyScalar(1000 / dt));
+          return;
+        } else {
+          throw new Error('Incompatible movement controls: ', control);
+        }
+      }
+
+      if (AFRAME.components.velocity && !data.constrainToNavMesh) velocity.copy(this.el.getAttribute('velocity'));
+      velocity.x -= velocity.x * data.easing * dt / 1000;
+      velocity.y -= velocity.y * data.easingY * dt / 1000;
+      velocity.z -= velocity.z * data.easing * dt / 1000;
+
+      if (dVelocity && data.enabled) {
+        // Set acceleration
+        if (dVelocity.length() > 1) {
+          dVelocity.setLength(this.data.acceleration * dt / 1000);
+        } else {
+          dVelocity.multiplyScalar(this.data.acceleration * dt / 1000);
+        }
+
+        // TODO: Handle rotated rig.
+        const cameraEl = data.camera;
+        // matrix.copy(cameraEl.object3D.matrixWorld);
+        // matrix2.getInverse(el.object3D.matrixWorld);
+        // matrix.multiply(matrix2);
+        // matrix.decompose(position, quaternion, scale);
+        // dVelocity.applyQuaternion(quaternion);
+
+        // Rotate to heading
+        dVelocity.applyQuaternion(cameraEl.object3D.quaternion);
+
+        if (!data.fly) dVelocity.y = 0;
+
+        velocity.add(dVelocity);
+      }
+    };
+
+  }())
+});

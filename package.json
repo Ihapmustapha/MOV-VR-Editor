@@ -1,0 +1,31 @@
+{
+    "name": "react-mov",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "aframe": "^0.7.1",
+        "aframe-extras": "^4.0.0",
+        "aframe-gradient-sky": "^1.0.4",
+        "aframe-particle-system-component": "^1.0.11",
+        "aframe-react": "^4.4.0",
+        "aframe-react-components": "0.0.1",
+        "aframe-sun-sky": "^3.0.3",
+        "prop-types": "^15.6.1",
+        "react": "^16.2.0",
+        "react-color": "^2.14.0",
+        "react-dom": "^16.2.0",
+        "react-numeric-input": "^2.2.3",
+        "react-scripts": "1.1.1",
+        "react-scroll-box": "^0.3.5",
+        "react-scrollbar": "^0.5.4"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "devDependencies": {
+        "svg-sprite-loader": "^3.7.3"
+    }
+}
