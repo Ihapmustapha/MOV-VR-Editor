@@ -15,9 +15,11 @@
         "react-color": "^2.14.0",
         "react-dom": "^16.2.0",
         "react-numeric-input": "^2.2.3",
+        "react-redux": "^5.0.7",
         "react-scripts": "1.1.1",
         "react-scroll-box": "^0.3.5",
-        "react-scrollbar": "^0.5.4"
+        "react-scrollbar": "^0.5.4",
+        "redux": "^4.0.0"
     },
     "scripts": {
         "start": "react-scripts start",

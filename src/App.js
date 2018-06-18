@@ -7,6 +7,7 @@ import RightSidebar from './RightSidebar/RightSidebar';
 import Box from './Primitives/Box';
 import Cylinder from './Primitives/Cylinder';
 import lookControl from './ControlScene/lookControls';
+import EntitiesList from './EntitiesList';
 import './App.css';
 require('aframe-extras');
 require('aframe-gradient-sky');
@@ -33,18 +34,18 @@ class App extends Component {
         })
     }
 
-    
+
 
     render() {
         return (
             <div>
                 <Scene>
-                    <lookControl /> 
-                     
+                    <lookControl />
+
                     {/*User Interface Divs*/}
                     <LeftSidebar onButtonClicked={this.handleObjGen}/>
                     <RightSidebar />
-                    
+
 
                     {/*Default Grid*/}
                     <a-grid />
@@ -55,6 +56,7 @@ class App extends Component {
                     />
 
                     {this.state.entities}
+                    <EntitiesList />
                 </Scene>
             </div>
         );
