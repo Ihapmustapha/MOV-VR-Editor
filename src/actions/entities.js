@@ -1,17 +1,22 @@
 import uuid from 'uuid';
-// Add and Remove action generatotrs
+// Add action generator
 // position, scale, rotation are default values
-export const addEntity = ( primitive ) => ({
+export const addEntity = (primitive) => ({
   type: 'ADD_ENTITY',
   entity: {
     id: uuid(),
     primitive,
-    position: { x: 1, y: 2, z: 3 },
-    scale: { x: 1, y: 2, z: 3 },
-    rotation: { x: 1, y: 2, z: 3 }
+    position: {
+      x: Math.floor(Math.random()*10),
+      y: Math.floor(Math.random()*10),
+      z: Math.floor(Math.random()*10)
+    },
+    scale: { x: 1, y: 1, z: 1 },
+    rotation: { x: 0, y: 0, z: 0 }
   }
 });
 
+// Remove action generator
 export const removeEntity = ({ id }) => ({
   type: 'REMOVE_ENTITY',
   id

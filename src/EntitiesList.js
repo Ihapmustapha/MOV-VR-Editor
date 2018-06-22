@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Primitive from './Primitives/Primitive';
 
 const EntitiesList = (props) => (
-  <div>
-    <h3>Whatever you are doing, don't use redux!!</h3>
-    {props.entities.length}
-  </div>
+  props.entities.map((entity) => {
+    return <Primitive  key={entity.id} {...entity} />;
+  })
 );
 
 const mapStateToProps = (state) => {

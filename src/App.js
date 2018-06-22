@@ -1,11 +1,9 @@
 import 'aframe';
-import {Entity, Scene} from 'aframe-react';
+import { Scene } from 'aframe-react';
 import 'aframe-particle-system-component';
-import React, { Component } from 'react';
+import React from 'react';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
 import RightSidebar from './RightSidebar/RightSidebar';
-import Box from './Primitives/Box';
-import Cylinder from './Primitives/Cylinder';
 import lookControl from './ControlScene/lookControls';
 import EntitiesList from './EntitiesList';
 import './App.css';
@@ -14,56 +12,32 @@ require('aframe-gradient-sky');
 
 
 
-class App extends Component {
+const App = () => {
+
+  return (
+
+    <Scene>
+      <lookControl />
+
+      {/*User Interface Divs*/}
+      <LeftSidebar />
+      <RightSidebar />
 
 
-    constructor(props) {
-        super(props);
-        this.handleObjGen = this.handleObjGen.bind(this);
-        this.state = {
-            entities: [<Box />, <Cylinder />],
-            selectedEntity: null
-        }
-    }
+      {/*Default Grid*/}
+      <a-grid />
 
-    handleObjGen(newObj){
-        this.setState((prevState) => {
-            return {
-                entities: prevState.entities.concat(newObj)
-            };
-        })
-    }
+      {/*Scene Sky - Gradient Sky*/}
+      <a-gradient-sky
+        material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
+      />
 
+      {/* {this.state.entities} */}
+      <EntitiesList />
+    </Scene>
 
-
-    render() {
-        return (
-            <div>
-                <Scene>
-                    <lookControl />
-
-                    {/*User Interface Divs*/}
-                    <LeftSidebar onButtonClicked={this.handleObjGen}/>
-                    <RightSidebar />
-
-
-                    {/*Default Grid*/}
-                    <a-grid />
-
-                    {/*Scene Sky - Gradient Sky*/}
-                    <a-gradient-sky
-                        material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
-                    />
-
-                    {this.state.entities}
-                    <EntitiesList />
-                </Scene>
-            </div>
-        );
-    }
-
-
-
+  );
 }
+
 
 export default App;
