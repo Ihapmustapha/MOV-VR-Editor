@@ -11,25 +11,25 @@ const rightSidebar = () => {
   return(
 
     <div id="rightContainer" aframe-injected>
-              <div id='rightSidebar'>
+      <div id='rightSidebar'>
 
-              {/*Positin input handler*/}
-                <PositionHandler />
+        {/*Positin input handler*/}
+        <PositionHandler />
 
-              {/*Rotation input handler*/}
-                  <RotationHandler />
+        {/*Rotation input handler*/}
+        <RotationHandler />
 
-              {/*Scale input handler*/}
-                  <ScaleHandler />
+        {/*Scale input handler*/}
+        <ScaleHandler />
 
-              {/*Color Wheel*/}
-              <div id='colorPicker'>
-                <SketchPicker width= '180px' />
-              </div>
-
-          </div>
+        {/*Color Wheel*/}
+        <div id='colorPicker'>
+          <SketchPicker width= '180px' />
+        </div>
+        
+      </div>
     </div>
-  
+
 
   );
 }

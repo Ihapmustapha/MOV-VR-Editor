@@ -4,13 +4,11 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import configureStore from './store/configureStore';
-import { addEntity, editEntity } from './actions/entities';
 import registerServiceWorker from './registerServiceWorker';
 
 // create the store
 const store = configureStore();
 
-store.dispatch(addEntity('box'));
 // use the provider component to pass the store for all components
 const jsx = (
   <Provider store={store}>
