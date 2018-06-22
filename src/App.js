@@ -4,7 +4,6 @@ import 'aframe-particle-system-component';
 import React from 'react';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
 import RightSidebar from './RightSidebar/RightSidebar';
-import lookControl from './ControlScene/lookControls';
 import EntitiesList from './EntitiesList';
 import './App.css';
 require('aframe-extras');
@@ -18,25 +17,29 @@ const App = () => {
   return (
 
     <Scene>
-      <lookControl />
+      
+        {/*User Interface Divs*/}
+        <LeftSidebar />
+        <RightSidebar />
 
-      {/*User Interface Divs*/}
-      <LeftSidebar />
-      <RightSidebar />
+        {/*Basic 3d Model For Testing loader*/}
+        {/*FAILED
+        <a-assets>
+            <a-asset-item id='couch' src='/3dModels/helmet/model.gltf'></a-asset-item>
+        </a-assets> 
+        <a-entity gltf-model="url(/3dModels/couch/model.gltf)"></a-entity>*/}
 
-		{/*Basic 3d Model For Testing loader*/}
-        <a-entity scale="0.5 0.5 0.5" object-model="src: url(./3dModels/Bigmax_White_OBJ.obj);"></a-entity>
 
-      {/*Default Grid*/}
-      <a-grid />
+        {/*Default Grid*/}
+        <a-grid />
 
-      {/*Scene Sky - Gradient Sky*/}
-      <a-gradient-sky
-        material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
-      />
+        {/*Scene Sky - Gradient Sky*/}
+        <a-gradient-sky
+            material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
+        />
 
-      {/* {this.state.entities} */}
-      <EntitiesList />
+        {/* {this.state.entities} */}
+        <EntitiesList />
     </Scene>
 
   );
