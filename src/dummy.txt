@@ -1,27 +1,4 @@
-import 'aframe';
-import { Scene } from 'aframe-react';
-import 'aframe-particle-system-component';
-import React from 'react';
-import LeftSidebar from './LeftSidebar/LeftSidebar';
-import RightSidebar from './RightSidebar/RightSidebar';
-import EntitiesList from './EntitiesList';
-import './App.css';
-require('aframe-extras');
-require('aframe-gradient-sky');
-require('aframe-orbit-controls-component-2');
 
-const myColor = ['#D92B6A', '#9564F2', '#FFCF59']
-
-
-
-    
-  
-  
-
-
-const App = () => {
-
-  return (
 
     <Scene>
         
@@ -87,11 +64,3 @@ const App = () => {
         {/* {this.state.entities} */}
         <EntitiesList />
     </Scene>
-
-  );
-}
-
-
-
-
-export default App;
