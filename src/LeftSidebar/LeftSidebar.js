@@ -16,16 +16,16 @@ const Colors = [
 
 const LeftSidebar = (props) => {
   return(
-      <div id="leftContainer" aframe-injected>
-        <div id="sideBar">
-          <p id='headline'>BASIC 3D MODELS</p>
-          {/*List Items*/}
-          <div className= 'list-container'>
+    <div id="leftContainer" aframe-injected>
+      <div id="sideBar">
+        <p id='headline'>BASIC 3D MODELS</p>
+        {/*List Items*/}
+        <div className= 'list-container'>
 
-            <button id='list-item' onClick={() => {
-              props.dispatch(addEntity('box'))
-            }}><Icon icon="cube" />
-          </button>
+          <button id='list-item' onClick={() => {
+            props.dispatch(addEntity('box'))
+          }}><Icon icon="cube" /></button>
+          
           <button id='list-item' onClick={() => {
             props.dispatch(addEntity('sphere'))
           }}><Icon icon="sphere" /></button>

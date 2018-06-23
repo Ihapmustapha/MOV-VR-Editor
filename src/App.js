@@ -1,5 +1,5 @@
 import 'aframe';
-import { Scene } from 'aframe-react';
+import { Entity, Scene } from 'aframe-react';
 import 'aframe-particle-system-component';
 import React from 'react';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
@@ -23,6 +23,15 @@ const App = () => {
       <LeftSidebar />
       <RightSidebar />
 
+      <Entity primitive="a-camera" look-controls >
+        <Entity
+          primitive="a-cursor"
+          cursor={{ fuse: true }}
+          material={{ color: '#EF0F94', shader: 'flat', opacity: 0.75 }}
+          geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
+          raycaster="objects: .clickable"
+        />
+      </Entity>
 
       {/*Default Grid*/}
       <a-grid />

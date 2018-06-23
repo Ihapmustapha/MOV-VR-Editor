@@ -32,7 +32,7 @@ export const editEntity = (id, updates) => ({
 ////////////////////////////////////////////
 
 // The only action for selecting reducer
-export const selectEntity = ({ id }) => ({
+export const selectEntity = ( id ) => ({
   type: 'SELECT_ENTITY',
   id
 });
