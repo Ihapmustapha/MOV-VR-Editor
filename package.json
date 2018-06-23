@@ -21,7 +21,8 @@
         "react-scripts": "1.1.1",
         "react-scroll-box": "^0.3.5",
         "react-scrollbar": "^0.5.4",
-        "redux": "^4.0.0"
+        "redux": "^4.0.0",
+        "three.js": "^0.77.1"
     },
     "scripts": {
         "start": "react-scripts start",

@@ -27,8 +27,24 @@ const App = () => {
         <a-assets>
             <a-asset-item id='couch' src='/3dModels/helmet/model.gltf'></a-asset-item>
         </a-assets> 
-        <a-entity gltf-model="url(/3dModels/couch/model.gltf)"></a-entity>*/}
+        <a-entity gltf-model="url(/3dModels/couch/model.gltf)"></a-entity>
+        <a-entity gltf-model={{src: 'virtualcity.gltf'}}/>
+        <a-entity scale="0.5 0.5 0.5" object-model="src: url(https://cdn.aframe.io/link-traversal/models/ground.json);">
+        </a-entity>*/}
 
+        <a-assets>
+            <a-asset-item id='tv-obj' src='/tv.gltf'></a-asset-item> 
+        </a-assets>
+        <a-entity id="tv1" gltf-model="#tv-obj" position="-1.66 2.15 2.18" rotation="0 -33.3 0"></a-entity> 
+
+        {/*Raycaster Testing*/}
+
+        <a-entity id="player" collider-check>
+            <a-entity raycaster="objects: .collidable" position="0 -0.9 0" rotation="90 0 0"></a-entity>
+        </a-entity>
+        <a-entity class="collidable" geometry="primitive: box" position="1 0 0"></a-entity>
+
+        
 
         {/*Default Grid*/}
         <a-grid />
@@ -44,6 +60,8 @@ const App = () => {
 
   );
 }
+
+
 
 
 export default App;
