@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 
 class RotationHandler extends Component {
-
-
-
   constructor () {
-      super();
-      this.state = {xRotation: 0, yRotation: 0, zRotation: 0};
+    super();
+    this.state = {X:'', Y:'', Z:''};
   }
 
 
@@ -19,45 +16,24 @@ class RotationHandler extends Component {
             <p>x</p>
             <p>y</p>
             <p>z</p>
-            <p>{this.state.xRotation}</p>
-            <p>{this.state.yRotation}</p>
-            <p>{this.state.zRotation}</p>
+            <p>{this.state.x}</p>
+            <p>{this.state.y}</p>
+            <p>{this.state.z}</p>
         </div>
-        <input type='number' className='input' onChange= {this.handleChangeX.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeY.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeZ.bind(this)}></input>
+
+        <input type='x' name='x' className='input' value={this.state.x} onChange= {this.handleRotationChange.bind(this)}></input>
+        <input type='y' name='y' className='input' value={this.state.y} onChange= {this.handleRotationChange.bind(this)}></input>
+        <input type='z' name='z' className='input' value={this.state.z} onChange= {this.handleRotationChange.bind(this)}></input>
       </div>
 
     );
   }
 
-  /*Handling Change in X Rotation*/
-    handleChangeX(e) {
-      const x = e.target.value;
-      this.changeX(x);
-    }
-    changeX(x) {
-      this.setState({xRotation: x});
-    }
-
-  /*Handling Change in Y Rotation*/
-    handleChangeY(e) {
-      const y = e.target.value;
-      this.changeY(y);
-    }
-    changeY(y) {
-      this.setState({yRotation: y});
-    }
-
-  /*Handling Change in Z Rotation*/
-    handleChangeZ(e) {
-       const z = e.target.value;
-       this.changeZ(z);
-    }
-    changeZ(z) {
-        this.setState({zRotation: z});
-      }
-
+  handleRotationChange(e){
+    let change = {}
+    change[e.target.name] = e.target.value
+    this.setState(change)
+  }
 }
 
 export default RotationHandler;

@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 
 
 class ScaleHandler extends Component {
-
-
   constructor () {
-      super();
-      this.state = {xScale: 0, yScale: 0, zScale: 0};
-  }
-
+  super();
+  this.state = {X:'', Y:'', Z:''};
+}
 
   render () {
     return(
@@ -18,45 +15,24 @@ class ScaleHandler extends Component {
             <p>x</p>
             <p>y</p>
             <p>z</p>
-            <p>{this.state.xScale}</p>
-            <p>{this.state.yScale}</p>
-            <p>{this.state.zScale}</p>
+            <p>{this.state.x}</p>
+            <p>{this.state.y}</p>
+            <p>{this.state.z}</p>
         </div>
-        <input type='number' className='input' onChange= {this.handleChangeX.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeY.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeZ.bind(this)}></input>
+
+        <input type='x' name='x' className='input' value={this.state.x} onChange= {this.handleScaleChange.bind(this)}></input>
+        <input type='y' name='y' className='input' value={this.state.y} onChange= {this.handleScaleChange.bind(this)}></input>
+        <input type='z' name='z' className='input' value={this.state.z} onChange= {this.handleScaleChange.bind(this)}></input>
       </div>
 
     );
   }
 
-  /*Handling Change in X Scale*/
-    handleChangeX(e) {
-      const x = e.target.value;
-      this.changeX(x);
-    }
-    changeX(x) {
-      this.setState({xScale: x});
-    }
-
-  /*Handling Change in Y Scale*/
-    handleChangeY(e) {
-      const y = e.target.value;
-      this.changeY(y);
-    }
-    changeY(y) {
-      this.setState({yScale: y});
-    }
-
-  /*Handling Change in Z Scale*/
-    handleChangeZ(e) {
-       const z = e.target.value;
-       this.changeZ(z);
-    }
-    changeZ(z) {
-        this.setState({zScale: z});
-      }
-
+  handleScaleChange(e){
+    let change = {}
+    change[e.target.name] = e.target.value
+    this.setState(change)
+  }
 }
 
 export default ScaleHandler;

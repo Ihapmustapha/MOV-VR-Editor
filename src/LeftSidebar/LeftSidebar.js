@@ -17,7 +17,7 @@ const Colors = [
 
 //writing a Json File with the exported objects
 
-const exportJson = (data) => {
+/*const exportJson = (data) => {
   const headers = new Headers(); 
   headers.append('Content-Type', 'application/json'); 
 
@@ -30,7 +30,7 @@ const exportJson = (data) => {
   const request = new Request('http://localhost:3005/posts', options);
   const response = await fetch(request); 
   const status = await response.status;  
-}
+}*/
 
 const LeftSidebar = (props) => {
   return(
@@ -61,7 +61,7 @@ const LeftSidebar = (props) => {
         </div>
         {/*navigation buttons*/}
         <span id='navButtons'>
-          <button onClick={exportJson}>Export</button>
+          <button /*onClick={exportJson}*/>Export</button>
         </span>
       </div>
     </div>
