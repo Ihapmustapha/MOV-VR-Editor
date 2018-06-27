@@ -39,11 +39,12 @@ p {
 	margin: 0;
 	padding: 0;
 	top: 670px;
-	left: 25px;
+	left: 22px;
+	
 }
 
 #navButtons button {
-	width: 80px;
+	width: 170px;
 	height: 30px;
 	border: none;
 	color: #64cac5;

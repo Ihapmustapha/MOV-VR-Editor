@@ -4,6 +4,7 @@ import Icon from '../Icon/Icon';
 import { connect } from 'react-redux';
 import { addEntity } from '../actions/entities';
 
+ 
 
 
 {/*A constant to hold all used colors to keep App's primary and secondary colors*/}
@@ -13,6 +14,23 @@ const Colors = [
   gradientThree: '06d4fd', gradientFour: '506bfd'},
   {gradientFive: 'e02494', gradientSix: 'd745f2'}
 ]
+
+//writing a Json File with the exported objects
+
+const exportJson = (data) => {
+  const headers = new Headers(); 
+  headers.append('Content-Type', 'application/json'); 
+
+  const options = {
+    method = 'POST', 
+    headers,
+    body: JSON.stringify(data), 
+  }; 
+
+  const request = new Request('http://localhost:3005/posts', options);
+  const response = await fetch(request); 
+  const status = await response.status;  
+}
 
 const LeftSidebar = (props) => {
   return(
@@ -38,13 +56,12 @@ const LeftSidebar = (props) => {
           <button id='list-item'><Icon icon="add" /></button>
           <button id='list-item'><Icon icon="add" /></button>
 
-          <button id='list-item'>7</button>
-          <button id='list-item'>8</button>
+          {/*<button id='list-item'>7</button>
+          <button id='list-item'>8</button>*/}
         </div>
         {/*navigation buttons*/}
         <span id='navButtons'>
-          <button>Next</button>
-          <button>Prev</button>
+          <button onClick={exportJson}>Export</button>
         </span>
       </div>
     </div>
