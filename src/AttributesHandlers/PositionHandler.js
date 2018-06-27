@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 
 class PositionHandler extends Component {
 
-  constructor () {
-      super();
+  constructor (props) {
+      super(props);
       this.state = {xPosition: 0, yPosition: 0, zPosition: 0};
   }
 
@@ -22,9 +22,9 @@ class PositionHandler extends Component {
             <p>{this.state.zPosition}</p>
         </div>
 
-        <input type='number' className='input' onChange= {this.handleChangeX.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeY.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeZ.bind(this)}></input>
+        <input type='number' name='xPosition' className='input' onChange= {this.props.onPositionChange}></input>
+        <input type='number' name='yPosition' className='input' onChange= {this.handleChangeY.bind(this)}></input>
+        <input type='number' name='zPosition' className='input' onChange= {this.handleChangeZ.bind(this)}></input>
       </div>
 
     );

@@ -1,5 +1,5 @@
 import 'aframe';
-import {Entity, Scene} from 'aframe-react';
+import {Entity} from 'aframe-react';
 import React from 'react';
 
 class Box extends React.Component {

@@ -7,29 +7,29 @@ import ScaleHandler from '../AttributesHandlers/ScaleHandler';
 
 
 
-const rightSidebar = () => {
+const rightSidebar = (props) => {
   return(
 
     <div id="rightContainer" aframe-injected>
-              <div id='rightSidebar'>
+      <div id='rightSidebar'>
 
-              {/*Positin input handler*/}
-                <PositionHandler />
+        {/*Positin input handler*/}
+        <PositionHandler onPositionChange={props.onPositionChange}/>
 
-              {/*Rotation input handler*/}
-                  <RotationHandler />
+        {/*Rotation input handler*/}
+        <RotationHandler />
 
-              {/*Scale input handler*/}
-                  <ScaleHandler />
+        {/*Scale input handler*/}
+        <ScaleHandler />
 
-              {/*Color Wheel*/}
-              <div id='colorPicker'>
-                <SketchPicker width= '180px' />
-              </div>
+        {/*Color Wheel*/}
+        <div id='colorPicker'>
+          <SketchPicker width= '180px' />
+        </div>
 
-          </div>
+      </div>
     </div>
-  
+
 
   );
 }
