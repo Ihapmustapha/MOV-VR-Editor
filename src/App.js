@@ -48,13 +48,64 @@ class App extends Component {
   };
 
   handlePositionChange = (e) => {
-    console.log(e.target.value)
-    const newVal = Number(e.target.value);
+    console.log(e.target.name)
+    let newVal = Number(e.target.value);
+    let axisVal = e.target.name;
     this.setState((prevState) => {
       return {
         entities: prevState.entities.map((entity) => {
           if (entity.id === prevState.selectedEntity) {
-            return {...entity, position: {x: newVal, y: 3, z: 4}}
+            if (axisVal === 'xPosition') {
+              return {...entity, position: {...entity.position, x: newVal} }
+            }else if (axisVal === 'yPosition') {
+              return {...entity, position: {...entity.position, y: newVal} }
+            }else if (axisVal === 'zPosition') {
+              return {...entity, position: {...entity.position, z: newVal} }
+            }
+          }
+          return entity;
+        })
+      }
+    })
+  };
+
+  handleRotationChange = (e) => {
+    console.log(e.target.name)
+    let newVal = Number(e.target.value);
+    let axisVal = e.target.name;
+    this.setState((prevState) => {
+      return {
+        entities: prevState.entities.map((entity) => {
+          if (entity.id === prevState.selectedEntity) {
+            if (axisVal === 'xRotation') {
+              return {...entity, rotation: {...entity.rotation, x: newVal} }
+            }else if (axisVal === 'yRotation') {
+              return {...entity, rotation: {...entity.rotation, y: newVal} }
+            }else if (axisVal === 'zRotation') {
+              return {...entity, rotation: {...entity.rotation, z: newVal} }
+            }
+          }
+          return entity;
+        })
+      }
+    })
+  };
+
+  handleScaleChange = (e) => {
+    console.log(e.target.name)
+    let newVal = Number(e.target.value);
+    let axisVal = e.target.name;
+    this.setState((prevState) => {
+      return {
+        entities: prevState.entities.map((entity) => {
+          if (entity.id === prevState.selectedEntity) {
+            if (axisVal === 'xScale') {
+              return {...entity, scale: {...entity.scale, x: newVal} }
+            }else if (axisVal === 'yScale') {
+              return {...entity, scale: {...entity.scale, y: newVal} }
+            }else if (axisVal === 'zScale') {
+              return {...entity, scale: {...entity.scale, z: newVal} }
+            }
           }
           return entity;
         })
@@ -70,8 +121,9 @@ class App extends Component {
         {/*User Interface Divs*/}
         <LeftSidebar onButtonClicked={this.handleObjGen}/>
         <RightSidebar
-          onPositionChange= {this.handlePositionChange}
-
+          onPositionChange={this.handlePositionChange}
+          onRotationChange={this.handleRotationChange}
+          onScaleChange={this.handleScaleChange}
         />
 
         {/*Default Grid*/}

@@ -17,10 +17,10 @@ const rightSidebar = (props) => {
         <PositionHandler onPositionChange={props.onPositionChange}/>
 
         {/*Rotation input handler*/}
-        <RotationHandler />
+        <RotationHandler onRotationChange={props.onRotationChange} />
 
         {/*Scale input handler*/}
-        <ScaleHandler />
+        <ScaleHandler onScaleChange={props.onScaleChange}/>
 
         {/*Color Wheel*/}
         <div id='colorPicker'>

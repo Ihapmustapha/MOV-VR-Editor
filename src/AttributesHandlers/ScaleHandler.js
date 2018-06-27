@@ -5,58 +5,55 @@ class ScaleHandler extends Component {
 
 
   constructor () {
-      super();
-      this.state = {xScale: 0, yScale: 0, zScale: 0};
+    super();
+    this.state = {xScale: 0, yScale: 0, zScale: 0};
   }
 
 
   render () {
     return(
       <div>
-      <p>Scale</p>
+        <p>Scale</p>
         <div id='inputText'>
-            <p>x</p>
-            <p>y</p>
-            <p>z</p>
-            <p>{this.state.xScale}</p>
-            <p>{this.state.yScale}</p>
-            <p>{this.state.zScale}</p>
+          <p>x</p>
+          <p>y</p>
+          <p>z</p>
+          <p>{this.state.xScale}</p>
+          <p>{this.state.yScale}</p>
+          <p>{this.state.zScale}</p>
         </div>
-        <input type='number' className='input' onChange= {this.handleChangeX.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeY.bind(this)}></input>
-        <input type='number' className='input' onChange= {this.handleChangeZ.bind(this)}></input>
+        <form onChange={this.props.onScaleChange}>
+          <input type='number' name='xScale' className='input' onChange= {this.handleChangeX}></input>
+          <input type='number' name='yScale' className='input' onChange= {this.handleChangeY}></input>
+          <input type='number' name='zScale' className='input' onChange= {this.handleChangeZ}></input>
+        </form>
       </div>
-
     );
   }
 
   /*Handling Change in X Scale*/
-    handleChangeX(e) {
-      const x = e.target.value;
-      this.changeX(x);
-    }
-    changeX(x) {
-      this.setState({xScale: x});
-    }
+  handleChangeX = (e) => {
+    const x = e.target.value;
+    this.setState({
+      xScale: x
+    });
+  }
 
   /*Handling Change in Y Scale*/
-    handleChangeY(e) {
-      const y = e.target.value;
-      this.changeY(y);
-    }
-    changeY(y) {
-      this.setState({yScale: y});
-    }
+  handleChangeY = (e) => {
+    const y = e.target.value;
+    this.setState({
+      yScale: y
+    });
+  }
 
   /*Handling Change in Z Scale*/
-    handleChangeZ(e) {
-       const z = e.target.value;
-       this.changeZ(z);
-    }
-    changeZ(z) {
-        this.setState({zScale: z});
-      }
-
+  handleChangeZ = (e) => {
+    const z = e.target.value;
+    this.setState({
+      zScale: z
+    });
+  }
 }
 
 export default ScaleHandler;
