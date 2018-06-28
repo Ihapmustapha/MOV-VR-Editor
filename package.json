@@ -31,6 +31,8 @@
         "eject": "react-scripts eject"
     },
     "devDependencies": {
+        "eslint": "^5.0.0",
         "svg-sprite-loader": "^3.7.3"
     }
+   
 }

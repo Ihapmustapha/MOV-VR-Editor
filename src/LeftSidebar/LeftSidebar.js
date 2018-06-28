@@ -3,7 +3,7 @@ import './style.css';
 import Icon from '../Icon/Icon';
 import { connect } from 'react-redux';
 import { addEntity } from '../actions/entities';
-
+import Inventory from '../Inventory/Inventory';
 
 
 {/*A constant to hold all used colors to keep App's primary and secondary colors*/}
@@ -40,13 +40,23 @@ const LeftSidebar = (props) => {
 
           <button id='list-item'>7</button>
           <button id='list-item'>8</button>
+          <span id='temp'>  
+              <Inventory />
+          </span>
         </div>
+          
         {/*navigation buttons*/}
+        
+        
         <span id='navButtons'>
           <button>Next</button>
           <button>Prev</button>
         </span>
+      
+      
+
       </div>
+      
     </div>
   );
 }
