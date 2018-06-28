@@ -28,9 +28,12 @@ class App extends Component {
   }
 
   render(){
-
+  
     return (
-
+    <div>
+      <div>
+       <LeftSidebar />
+      </div>
       <Scene>
 
         <Entity primitive="a-camera"
@@ -55,11 +58,11 @@ class App extends Component {
         />
 
         {/*User Interface Divs*/}
-        <LeftSidebar />
+        
         <RightSidebar />
 
         {/*User Interface Divs*/}
-        <LeftSidebar />
+       
         <RightSidebar />
 
         {/*Default Grid*/}
@@ -96,7 +99,7 @@ class App extends Component {
         */}
 
       </Scene>
-
+    </div>
     );
   }
 }

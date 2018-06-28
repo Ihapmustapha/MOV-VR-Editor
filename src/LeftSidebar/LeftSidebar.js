@@ -3,6 +3,7 @@ import './style.css';
 import Icon from '../Icon/Icon';
 import { connect } from 'react-redux';
 import { addEntity } from '../actions/entities';
+import Inventory from '../Inventory/Inventory'
 
  
 
@@ -55,7 +56,9 @@ const LeftSidebar = (props) => {
 
           <button id='list-item'><Icon icon="add" /></button>
           <button id='list-item'><Icon icon="add" /></button>
-
+          <span>
+            <Inventory />
+          </span>
           {/*<button id='list-item'>7</button>
           <button id='list-item'>8</button>*/}
         </div>
