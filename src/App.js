@@ -39,6 +39,19 @@ class App extends Component {
     })
   };
 
+  handleObjRem = (selectedEntitiy) => {
+    console.log("remove me");
+    this.setState((prevState) => {
+      return {
+        entities: prevState.entities.filter((entity) => {
+          if (entity.id !== selectedEntitiy) {
+            return entity;
+          }
+        })
+      };
+    })
+  };
+
   handleClick = (e) => {
     const selected = e.target.id;
     this.setState({
@@ -48,7 +61,6 @@ class App extends Component {
   };
 
   handlePositionChange = (e) => {
-    console.log(e.target.name)
     let newVal = Number(e.target.value);
     let axisVal = e.target.name;
     this.setState((prevState) => {
@@ -70,7 +82,6 @@ class App extends Component {
   };
 
   handleRotationChange = (e) => {
-    console.log(e.target.name)
     let newVal = Number(e.target.value);
     let axisVal = e.target.name;
     this.setState((prevState) => {
@@ -92,7 +103,6 @@ class App extends Component {
   };
 
   handleScaleChange = (e) => {
-    console.log(e.target.name)
     let newVal = Number(e.target.value);
     let axisVal = e.target.name;
     this.setState((prevState) => {
@@ -132,7 +142,15 @@ class App extends Component {
       <Scene>
 
         {/*User Interface Divs*/}
-        <LeftSidebar onButtonClicked={this.handleObjGen}/>
+        <LeftSidebar
+          onButtonClicked={this.handleObjGen}
+          onRemoveClicked={this.handleObjRem}
+          selectedEntitiy={this.state.entities.filter((entity) => {
+            if (entity.id === this.state.selectedEntity){
+              return entity;
+            }
+          })[0]}
+        />
         <RightSidebar
           onPositionChange={this.handlePositionChange}
           onRotationChange={this.handleRotationChange}

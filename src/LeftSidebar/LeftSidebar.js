@@ -60,7 +60,10 @@ const leftSidebar = (props) => {
           <button id='list-item'><Icon icon="pyramid" /></button>
 
           <button id='list-item'><Icon icon="add" /></button>
-          <button id='list-item'><Icon icon="add" /></button>
+          <button id='list-item' onClick={()=> {
+            props.onRemoveClicked(props.selectedEntitiy ? props.selectedEntitiy.id : '')
+          }}
+            ><Icon icon="add" /></button>
 
           <button id='list-item'>7</button>
           <button id='list-item'>8</button>
