@@ -40,9 +40,9 @@ class App extends Component {
   };
 
   handleClick = (e) => {
-
+    const selected = e.target.id;
     this.setState({
-      selectedEntity: e.target.id
+      selectedEntity: selected
     })
     console.log(this.state.selectedEntity);
   };
@@ -113,6 +113,19 @@ class App extends Component {
     })
   };
 
+  handleColorChange = (color) => {
+    this.setState((prevState) => {
+      return {
+        entities: prevState.entities.map((entity) => {
+          if (entity.id === prevState.selectedEntity) {
+            return {...entity, color: color.hex }
+          }
+          return entity;
+        })
+      }
+    })
+  }
+
   render() {
     return (
 
@@ -124,6 +137,12 @@ class App extends Component {
           onPositionChange={this.handlePositionChange}
           onRotationChange={this.handleRotationChange}
           onScaleChange={this.handleScaleChange}
+          onColorChange={this.handleColorChange}
+          selectedEntitiy={this.state.entities.filter((entity) => {
+            if (entity.id === this.state.selectedEntity){
+              return entity;
+            }
+          })[0]}
         />
 
         {/*Default Grid*/}

@@ -1,58 +1,44 @@
-import React, { Component } from 'react';
+import React  from 'react';
 
 
-class RotationHandler extends Component {
+const RotationHandler = (props) => {
 
-  state = {
-    xRotation: 0,
-    yRotation: 0,
-    zRotation: 0
-  };
-
-  render () {
-    return(
-      <div>
-        <p>Rotation</p>
-        <div id='inputText'>
-          <p>x</p>
-          <p>y</p>
-          <p>z</p>
-          <p>{this.state.xRotation}</p>
-          <p>{this.state.yRotation}</p>
-          <p>{this.state.zRotation}</p>
-        </div>
-        <form onChange={this.props.onRotationChange}>
-          <input type='number' name='xRotation' className='input' onChange= {this.handleChangeX}></input>
-          <input type='number' name='yRotation' className='input' onChange= {this.handleChangeY}></input>
-          <input type='number' name='zRotation' className='input' onChange= {this.handleChangeZ}></input>
-        </form>
+  return(
+    <div>
+      <p>Rotation</p>
+      <div id='inputText'>
+        <p>x</p>
+        <p>y</p>
+        <p>z</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.rotation.x : ''}</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.rotation.y : ''}</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.rotation.z : ''}</p>
       </div>
-    );
-  }
+      <form onChange={props.onRotationChange}>
+        <input
+          type='number'
+          name='xRotation'
+          value={props.selectedEntitiy ? props.selectedEntitiy.rotation.x : ''}
+          className='input' >
 
-  /*Handling Change in X Rotation*/
-  handleChangeX = (e) => {
-    const x = e.target.value;
-    this.setState({
-      xRotation: x
-    });
-  }
+        </input>
+        <input
+          type='number'
+          name='yRotation'
+          value={props.selectedEntitiy ? props.selectedEntitiy.rotation.y : ''}
+          className='input' >
 
-  /*Handling Change in Y Rotation*/
-  handleChangeY = (e) => {
-    const y = e.target.value;
-    this.setState({
-      yRotation: y
-    });
-  }
+        </input>
+        <input
+          type='number'
+          name='zRotation'
+          value={props.selectedEntitiy ? props.selectedEntitiy.rotation.z : ''}
+          className='input' >
 
-  /*Handling Change in Z Rotation*/
-  handleChangeZ = (e) => {
-    const z = e.target.value;
-    this.setState({
-      zRotation: z
-    });
-  }
+        </input>
+      </form>
+    </div>
+  );
 }
 
 export default RotationHandler;

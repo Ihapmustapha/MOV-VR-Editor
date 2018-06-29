@@ -1,61 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-class PositionHandler extends Component {
+const PositionHandler = (props) => {
 
-  state = {
-    xPosition: 0,
-    yPosition: 0,
-    zPosition: 0
-  };
-
-  render () {
-    return(
-      <div>
-        <p>Position</p>
-        <div id='inputText'>
-          <p>x</p>
-          <p>y</p>
-          <p>z</p>
-          <p>{this.state.xPosition}</p>
-          <p>{this.state.yPosition}</p>
-          <p>{this.state.zPosition}</p>
-        </div>
-        <form onChange={this.props.onPositionChange}>
-          <input type='number' name='xPosition' className='input' onChange= {this.handleChangeX}></input>
-          <input type='number' name='yPosition' className='input' onChange= {this.handleChangeY}></input>
-          <input type='number' name='zPosition' className='input' onChange= {this.handleChangeZ}></input>
-        </form>
+  return(
+    <div>
+      <p>Position</p>
+      <div id='inputText'>
+        <p>x</p>
+        <p>y</p>
+        <p>z</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.position.x : ''}</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.position.y : ''}</p>
+        <p>{props.selectedEntitiy ? props.selectedEntitiy.position.z : ''}</p>
       </div>
+      <form onChange={props.onPositionChange}>
+        <input
+          type='number'
+          name='xPosition'
+          value={props.selectedEntitiy ? props.selectedEntitiy.position.x : ''}
+          className='input'>
+        </input>
 
-    );
-  }
+        <input
+          type='number'
+          name='yPosition'
+          value={props.selectedEntitiy ? props.selectedEntitiy.position.y : ''}
+          className='input'>
+        </input>
 
-  /*Handling Change in X Position*/
-  handleChangeX = (e) => {
-    const x = e.target.value;
-    this.setState({
-      xPosition: x
-    });
-  }
-
-  /*Handling Change in Y Position*/
-  handleChangeY = (e) => {
-    const y = e.target.value;
-    this.setState({
-      yPosition: y
-    });
-  }
-
-  /*Handling Change in Z Position*/
-  handleChangeZ = (e) => {
-    const z = e.target.value;
-    this.setState({
-      zPosition: z
-    });
-  }
+        <input
+          type='number'
+          name='zPosition'
+          value={props.selectedEntitiy ? props.selectedEntitiy.position.z : ''}
+          className='input'>
+        </input>
+      </form>
+    </div>
+  );
 }
-
 
 
 export default PositionHandler;

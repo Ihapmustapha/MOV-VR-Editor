@@ -4,20 +4,9 @@ import Icon from '../Icon/Icon.js';
 import uuid from 'uuid';
 
 
-
-{/*A constant to hold all used colors to keep App's primary and secondary colors*/}
-// const Colors = [
-//   {move: '3f4467', movedark: '14121e', lightsky: '64cac5'},
-//   {gradientOne: '423d62', gradientTwo: '5fb9b8',
-//   gradientThree: '06d4fd', gradientFour: '506bfd'},
-//   {gradientFive: 'e02494', gradientSix: 'd745f2'}
-// ]
-
-
-
 const leftSidebar = (props) => {
   return(
-    <div id="leftContainer" aframe-injected>
+    <div id="leftContainer" aframe-injected='true'>
       <div id="sideBar">
         <p id='headline'>BASIC 3D MODELS</p>
         {/*List Items*/}
@@ -33,8 +22,8 @@ const leftSidebar = (props) => {
                 z: Math.floor(Math.random()*10)
               },
               color: '#EF0F94',
-              rotation: {x: 2, y: 3, z: 4},
-              scale: {x: 2, y: 3, z: 4}
+              rotation: {x: 0, y: 0, z: 0},
+              scale: {x: 2, y: 2, z: 2}
             })}
           }><Icon icon="cube" /></button>
 
@@ -48,8 +37,8 @@ const leftSidebar = (props) => {
                 z: Math.floor(Math.random()*10)
               },
               color: '#EF0F94',
-              rotation: {x: 2, y: 3, z: 4},
-              scale: {x: 2, y: 3, z: 4}
+              rotation: {x: 0, y: 0, z: 0},
+              scale: {x: 2, y: 2, z: 2}
             })}
           }><Icon icon="sphere" /></button>
 
@@ -63,8 +52,8 @@ const leftSidebar = (props) => {
                 z: Math.floor(Math.random()*10)
               },
               color: '#EF0F94',
-              rotation: {x: 2, y: 3, z: 4},
-              scale: {x: 2, y: 3, z: 4}
+              rotation: {x: 0, y: 0, z: 0},
+              scale: {x: 2, y: 2, z: 2}
             })}
           }><Icon icon="cylinder" /></button>
 
