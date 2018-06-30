@@ -138,65 +138,69 @@ class App extends Component {
 
   render() {
     return (
-
-      <Scene>
-
-        {/*User Interface Divs*/}
-        <LeftSidebar
-          onButtonClicked={this.handleObjGen}
-          onRemoveClicked={this.handleObjRem}
-          selectedEntitiy={this.state.entities.filter((entity) => {
-            if (entity.id === this.state.selectedEntity){
-              return entity;
-            }
-          })[0]}
-        />
-        <RightSidebar
-          onPositionChange={this.handlePositionChange}
-          onRotationChange={this.handleRotationChange}
-          onScaleChange={this.handleScaleChange}
-          onColorChange={this.handleColorChange}
-          selectedEntitiy={this.state.entities.filter((entity) => {
-            if (entity.id === this.state.selectedEntity){
-              return entity;
-            }
-          })[0]}
-        />
-
-        {/*Default Grid*/}
-        <a-grid />
-
-        {/*Scene Sky - Gradient Sky*/}
-        <a-gradient-sky
-          material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
-        />
-
-        <Entity primitive="a-camera" look-controls >
-          <Entity
-            primitive="a-cursor"
-            cursor={{ fuse: false }}
-            material={{ color: '#EF0F94', shader: 'flat', opacity: 0.75 }}
-            geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
-            raycaster="objects: .clickable"
+      <div>
+        <div>
+          <LeftSidebar
+            onButtonClicked={this.handleObjGen}
+            onRemoveClicked={this.handleObjRem}
+            selectedEntitiy={this.state.entities.filter((entity) => {
+              if (entity.id === this.state.selectedEntity){
+                return entity;
+              }
+            })[0]}
           />
-        </Entity>
+        </div>
+        <Scene>
 
-        {this.state.entities.map((entity) => {
-          return (
-            <Entity class="clickable"
-              id={entity.id}
-              key={entity.id}
-              geometry={{primitive: entity.primitive}}
-              material={{color: entity.color}}
-              position={entity.position}
-              rotation={entity.rotation}
-              scale={entity.scale}
-              events={{click: this.handleClick}}
+          {/*User Interface Divs*/}
+
+          <RightSidebar
+            onPositionChange={this.handlePositionChange}
+            onRotationChange={this.handleRotationChange}
+            onScaleChange={this.handleScaleChange}
+            onColorChange={this.handleColorChange}
+            selectedEntitiy={this.state.entities.filter((entity) => {
+              if (entity.id === this.state.selectedEntity){
+                return entity;
+              }
+            })[0]}
+          />
+
+          {/*Default Grid*/}
+          <a-grid />
+
+          {/*Scene Sky - Gradient Sky*/}
+          <a-gradient-sky
+            material="shader: gradient; topColor: 255 255 255; bottomColor: 151 239 255;"
+          />
+
+          <Entity primitive="a-camera" look-controls >
+            <Entity
+              primitive="a-cursor"
+              cursor={{ fuse: false }}
+              material={{ color: '#EF0F94', shader: 'flat', opacity: 0.75 }}
+              geometry={{ radiusInner: 0.005, radiusOuter: 0.007 }}
+              raycaster="objects: .clickable"
             />
-          );
-        })}
+          </Entity>
 
-      </Scene>
+          {this.state.entities.map((entity) => {
+            return (
+              <Entity class="clickable"
+                id={entity.id}
+                key={entity.id}
+                geometry={{primitive: entity.primitive}}
+                material={{color: entity.color}}
+                position={entity.position}
+                rotation={entity.rotation}
+                scale={entity.scale}
+                events={{click: this.handleClick}}
+              />
+            );
+          })}
+
+        </Scene>
+      </div>
     );
   }
 }

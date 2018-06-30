@@ -2,6 +2,7 @@ import React from 'react';
 import './style.css';
 import Icon from '../Icon/Icon.js';
 import uuid from 'uuid';
+import Inventory from '../Inventory/Inventory';
 
 
 const leftSidebar = (props) => {
@@ -63,10 +64,12 @@ const leftSidebar = (props) => {
           <button id='list-item' onClick={()=> {
             props.onRemoveClicked(props.selectedEntitiy ? props.selectedEntitiy.id : '')
           }}
-            ><Icon icon="add" /></button>
+          ><Icon icon="add" /></button>
 
-          <button id='list-item'>7</button>
-          <button id='list-item'>8</button>
+          <div>
+            <Inventory />
+          </div>
+
         </div>
         {/*navigation buttons*/}
         <span id='navButtons'>
