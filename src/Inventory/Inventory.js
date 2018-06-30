@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import LeftSidebar from '../LeftSidebar/LeftSidebar';
 
 class Inventory extends React.Component {
+    array = [];
     constructor(props) {
         super(props);
         this.state = { value: 'poly' };
@@ -22,35 +23,47 @@ class Inventory extends React.Component {
 
     }
 
-    onResults( data ) {
-    console.log(data);
-      
-    while ( document.getElementById('SearchResults').childNodes.length ) {
+    onResults(data) {
+     //   console.log(data);
 
-        document.getElementById('SearchResults').removeChild( document.getElementById('SearchResults').firstChild );
-      }
+        var array = data;
+      //  console.log(array);
+
+        while (document.getElementById('SearchResults').childNodes.length) {
+
+            document.getElementById('SearchResults').removeChild(document.getElementById('SearchResults').firstChild);
+        }
 
 
-     var assets = data.assets;
+        var assets = data.assets;
 
-        if ( assets ) {
+        if (assets) {
 
-            for ( var i = 0; i < assets.length; i ++ ) {
+            for (var i = 0; i < assets.length; i++) {
 
-                var asset = assets[ i ];
+                var asset = assets[i];
 
                 //var image = createImage( asset );
-                var image = document.createElement( 'img' );
+                var image = document.createElement('img');
                 image.src = asset.thumbnail.url;
                 image.style.width = '35px';
                 image.style.height = '30px';
-               
-               // ReactDOM.render(image, document.getElementById('SearchResults'));
-                document.getElementById('SearchResults').append( image );
+
+                // ReactDOM.render(image, document.getElementById('SearchResults'));
+                document.getElementById('SearchResults').append(image);
+
+                image.onclick = function () {
+                    //  alert (asset.formats.root.url);
+                    var gltfObjUrl = asset.formats.find(format =>
+                        format.formatType === 'GLTF' ? format.root.url : undefined)
+                    if (gltfObjUrl)
+                        alert(JSON.stringify(gltfObjUrl));
+
+                }
 
 
-      }
-     }
+            }
+        }
     }
     sendRequest(keyword, callback) {
         var url = `https://poly.googleapis.com/v1/assets?keywords=${keyword}&format=OBJ&key=AIzaSyAmZnf3PlWn87yeCUimjQsIyvdSRo2QUP0`;
@@ -58,9 +71,9 @@ class Inventory extends React.Component {
 
         request.open('GET', url, true);
         request.addEventListener('load', function (event) {
-        callback(JSON.parse(event.target.response));
+            callback(JSON.parse(event.target.response));
 
-       });
+        });
         request.send(null);
     }
 
@@ -68,18 +81,19 @@ class Inventory extends React.Component {
     render() {
         return (
             <div>
+                
                 <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
+                    <label>
+                        Name:
                 <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <button type="submit" >submit</button>
-                <span id="SearchResults">images here</span>
-            </form>
-            
-           
+                    </label>
+                    <button type="submit" >submit</button>
+               
+                </form>
+                <div id="SearchResults">images here</div>
+   
             </div>
-        
+
         );
     }
 }

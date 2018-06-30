@@ -6,9 +6,11 @@ import LeftSidebar from './LeftSidebar/LeftSidebar';
 import RightSidebar from './RightSidebar/RightSidebar';
 import EntitiesList from './EntitiesList';
 import './App.css';
+import Inventory from './Inventory/Inventory';
 require('aframe-extras');
 require('aframe-gradient-sky');
 require('aframe-orbit-controls-component-2');
+
 
 
 const myColor = ['#D92B6A', '#9564F2', '#FFCF59']
@@ -31,6 +33,7 @@ class App extends Component {
 
     return (
       <div>
+        console.log(data);
       <div>
       <LeftSidebar />
       </div>
@@ -47,7 +50,7 @@ class App extends Component {
                 raycaster="objects: .clickable"
             />
         </Entity>
-  
+        <a-entity gltf-model="model.gltf" scale="0.01 0.01 0.01"></a-entity>
         {/*Entity for Cursor Testing*/}
         <Entity class="clickable"
             geometry={{primitive: 'box'}}
