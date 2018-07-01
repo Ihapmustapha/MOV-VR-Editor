@@ -2,6 +2,7 @@ import 'aframe';
 import {Entity, Scene} from 'aframe-react';
 import 'aframe-particle-system-component';
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import LeftSidebar from './LeftSidebar/LeftSidebar';
 import RightSidebar from './RightSidebar/RightSidebar';
 // import lookControl from './ControlScene/lookControls';
@@ -22,13 +23,14 @@ class App extends Component {
       {
         id: uuid(),
         primitive: 'box',
-        color: '#EF0F94',
+        color: '#9013FE',
         position: {x: 2, y: 3, z: 4},
         rotation: {x: 2, y: 3, z: 4},
         scale: {x: 2, y: 3, z: 4}
       }
     ],
-    selectedEntity: undefined
+    selectedEntity: undefined,
+    assets: []
   };
 
   handleObjGen = (newObj) => {
@@ -136,6 +138,51 @@ class App extends Component {
     })
   }
 
+  onRequestHandler = (response) => {
+    this.onResults(response,this.importAsset);
+  };
+
+  importAsset = (asset) => {
+    console.log(asset);
+    this.setState((prevState) => {
+      return {
+        assets: prevState.assets.concat({
+          id: asset,
+          position: {x: 0, y:  0, z: 0},
+          color: '#9013FE',
+          rotation: {x: 0, y: 0, z: 0},
+          scale: {x: 2, y: 2, z: 2}
+        })
+      }
+    })
+  };
+
+  onResults = (data, callback) => {
+    console.log(data);
+    while ( document.getElementById('SearchResults').childNodes.length ) {
+      document.getElementById('SearchResults').removeChild( document.getElementById('SearchResults').firstChild );
+    }
+
+    const assets = data.assets;
+    if ( assets ) {
+      for ( let i = 0; i < assets.length; i ++ ) {
+        let asset = assets[ i ];
+        //var image = createImage( asset );
+
+        const image = document.createElement('img');
+        image.src = asset.thumbnail.url;
+        image.style.width = '40px';
+        image.style.height = '30px';
+        image.addEventListener('click', function (event) {
+          callback(asset.formats[0].root.url);
+        });
+
+        // ReactDOM.render(<Image/>, document.getElementById('SearchResults'));
+        document.getElementById('SearchResults').append( image );
+      }
+    }
+  };
+
   render() {
     return (
       <div>
@@ -143,6 +190,7 @@ class App extends Component {
           <LeftSidebar
             onButtonClicked={this.handleObjGen}
             onRemoveClicked={this.handleObjRem}
+            onRequestHandler={this.onRequestHandler}
             selectedEntitiy={this.state.entities.filter((entity) => {
               if (entity.id === this.state.selectedEntity){
                 return entity;
@@ -199,10 +247,39 @@ class App extends Component {
             );
           })}
 
+
+
+          {this.state.assets.map((asset) => {
+            return (
+              <a-asset-item
+                id={asset.id}
+                key={asset.id}
+                src={asset.id}>
+              </a-asset-item>
+              );
+          })}
+
+          {this.state.assets.map((asset) => {
+            return (
+              <Entity class="clickable"
+                id={asset.id}
+                key={asset.id}
+                // material={{color: 'red'}}
+                obj-model={`obj: #${asset.id}`}
+                material={{color: asset.color}}
+                position={asset.position}
+                rotation={asset.rotation}
+                scale={asset.scale}
+                events={{click: this.handleClick}}
+              />
+              );
+          })}
+
+
         </Scene>
       </div>
     );
   }
 }
 
-export default App;
+  export default App;

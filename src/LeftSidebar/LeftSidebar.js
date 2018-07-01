@@ -6,6 +6,7 @@ import Inventory from '../Inventory/Inventory';
 
 
 const leftSidebar = (props) => {
+
   return(
     <div id="leftContainer" aframe-injected='true'>
       <div id="sideBar">
@@ -22,7 +23,7 @@ const leftSidebar = (props) => {
                 y:  Math.floor(Math.random()*10),
                 z: Math.floor(Math.random()*10)
               },
-              color: '#EF0F94',
+              color: '#9013FE',
               rotation: {x: 0, y: 0, z: 0},
               scale: {x: 2, y: 2, z: 2}
             })}
@@ -37,7 +38,7 @@ const leftSidebar = (props) => {
                 y:  Math.floor(Math.random()*10),
                 z: Math.floor(Math.random()*10)
               },
-              color: '#EF0F94',
+              color: '#9013FE',
               rotation: {x: 0, y: 0, z: 0},
               scale: {x: 2, y: 2, z: 2}
             })}
@@ -52,7 +53,7 @@ const leftSidebar = (props) => {
                 y:  Math.floor(Math.random()*10),
                 z: Math.floor(Math.random()*10)
               },
-              color: '#EF0F94',
+              color: '#9013FE',
               rotation: {x: 0, y: 0, z: 0},
               scale: {x: 2, y: 2, z: 2}
             })}
@@ -67,7 +68,9 @@ const leftSidebar = (props) => {
           ><Icon icon="add" /></button>
 
           <div>
-            <Inventory />
+            <Inventory
+              onRequestHandler={props.onRequestHandler}
+            />
           </div>
 
         </div>
@@ -80,5 +83,6 @@ const leftSidebar = (props) => {
     </div>
   );
 }
+
 
 export default leftSidebar;
